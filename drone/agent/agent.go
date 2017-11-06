@@ -218,6 +218,7 @@ func start(c *cli.Context) {
 			<-time.After(backoff)
 			continue
 		}
+
 		opts := []stomp.MessageOption{
 			stomp.WithCredentials("x-token", accessToken),
 		}
@@ -228,6 +229,7 @@ func start(c *cli.Context) {
 			<-time.After(backoff)
 			continue
 		}
+		defer client.Disconnect()
 
 		opts = []stomp.MessageOption{
 			stomp.WithAck("client"),
@@ -240,9 +242,15 @@ func start(c *cli.Context) {
 		}
 
 		// subscribe to the pending build queue.
-		client.Subscribe("/queue/pending", stomp.HandlerFunc(func(m *stomp.Message) {
+		sub, err := client.Subscribe("/queue/pending", stomp.HandlerFunc(func(m *stomp.Message) {
 			go handler(m) // HACK until we a channel based Subscribe implementation
 		}), opts...)
+		if err != nil {
+			logger.Warningf("failed to subscribe to /queue/pending, retry in %v. %s", backoff, err)
+			<-time.After(backoff)
+			continue
+		}
+		defer client.Unsubscribe(sub)
 
 		logger.Noticef("connection established, ready to process builds.")
 		<-client.Done()
