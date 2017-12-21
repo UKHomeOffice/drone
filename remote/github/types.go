@@ -92,6 +92,7 @@ type webhook struct {
 			Ref  string `json:"ref"`
 			Repo struct {
 				CloneURL string `json:"clone_url"`
+				Fork     bool   `json:"fork"`
 			} `json:"repo"`
 		} `json:"head"`
 	} `json:"pull_request"`

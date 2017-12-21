@@ -20,6 +20,7 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http"
+	"os"
 
 	"github.com/drone/drone/model"
 )
@@ -102,5 +103,13 @@ func parsePullHook(payload []byte, merge bool) (*model.Repo, *model.Build, error
 	if hook.PullRequest.State != stateOpen {
 		return nil, nil, nil
 	}
+
+	// a hack to ignore building PRs from forked repos
+	if v := os.Getenv("GITHUB_BUILD_FORK_PR"); v == "false" {
+		if hook.PullRequest.Head.Repo.Fork {
+			return nil, nil, nil
+		}
+	}
+
 	return convertRepoHook(hook), convertPullHook(hook, merge), nil
 }
