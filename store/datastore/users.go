@@ -25,7 +25,7 @@ func (db *datastore) GetUserList() ([]*model.User, error) {
 	return users, err
 }
 
-func (db *datastore) GetUserFeed(listof []*model.RepoLite) ([]*model.Feed, error) {
+func (db *datastore) GetUserFeed(listof []*model.Repo) ([]*model.Feed, error) {
 	var (
 		args []interface{}
 		stmt string
@@ -45,7 +45,7 @@ func (db *datastore) GetUserFeed(listof []*model.RepoLite) ([]*model.Feed, error
 	return feed, err
 }
 
-func (db *datastore) GetUserFeedLatest(listof []*model.RepoLite) ([]*model.Feed, error) {
+func (db *datastore) GetUserFeedLatest(listof []*model.Repo) ([]*model.Feed, error) {
 	var (
 		args []interface{}
 		stmt string

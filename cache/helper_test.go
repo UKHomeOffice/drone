@@ -105,9 +105,9 @@ func TestHelper(t *testing.T) {
 var (
 	fakeErr   = errors.New("Not Found")
 	fakeUser  = &model.User{Login: "octocat"}
-	fakePerm  = &model.Perm{true, true, true}
-	fakeRepo  = &model.RepoLite{Owner: "octocat", Name: "Hello-World"}
-	fakeRepos = []*model.RepoLite{
+	fakePerm  = &model.Perm{Pull: true, Push: true, Admin: true}
+	fakeRepo  = &model.Repo{Owner: "octocat", Name: "Hello-World"}
+	fakeRepos = []*model.Repo{
 		{Owner: "octocat", Name: "Hello-World"},
 		{Owner: "octocat", Name: "hello-world"},
 		{Owner: "octocat", Name: "Spoon-Knife"},

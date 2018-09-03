@@ -38,7 +38,7 @@ func rebind(query string) string {
 
 // helper function that converts a simple repsitory list
 // to a sql IN statment.
-func toList(listof []*model.RepoLite) (string, []interface{}) {
+func toList(listof []*model.Repo) (string, []interface{}) {
 	var size = len(listof)
 	if size > 999 {
 		size = 999
@@ -55,7 +55,7 @@ func toList(listof []*model.RepoLite) (string, []interface{}) {
 
 // helper function that converts a simple repository list
 // to a sql IN statement compatible with postgres.
-func toListPosgres(listof []*model.RepoLite) (string, []interface{}) {
+func toListPosgres(listof []*model.Repo) (string, []interface{}) {
 	var size = len(listof)
 	if size > 999 {
 		size = 999

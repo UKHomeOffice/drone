@@ -180,14 +180,14 @@ func (c *client) Repo(u *model.User, owner, name string) (*model.Repo, error) {
 
 // Repos returns a list of all repositories for GitHub account, including
 // organization repositories.
-func (c *client) Repos(u *model.User) ([]*model.RepoLite, error) {
+func (c *client) Repos(u *model.User) ([]*model.Repo, error) {
 	client := c.newClientToken(u.Token)
 
 	opts := new(github.RepositoryListOptions)
 	opts.PerPage = 100
 	opts.Page = 1
 
-	var repos []*model.RepoLite
+	var repos []*model.Repo
 	for opts.Page > 0 {
 		list, resp, err := client.Repositories.List("", opts)
 		if err != nil {

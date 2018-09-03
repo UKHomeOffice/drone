@@ -9,14 +9,15 @@ import (
 	"crypto/x509"
 	"encoding/pem"
 	"fmt"
-	"github.com/drone/drone/model"
-	"github.com/drone/drone/remote"
-	"github.com/drone/drone/remote/bitbucketserver/internal"
-	"github.com/mrjones/oauth"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
+
+	"github.com/drone/drone/model"
+	"github.com/drone/drone/remote"
+	"github.com/drone/drone/remote/bitbucketserver/internal"
+	"github.com/mrjones/oauth"
 )
 
 const (
@@ -128,14 +129,14 @@ func (c *Config) Repo(u *model.User, owner, name string) (*model.Repo, error) {
 	return convertRepo(repo), nil
 }
 
-func (c *Config) Repos(u *model.User) ([]*model.RepoLite, error) {
+func (c *Config) Repos(u *model.User) ([]*model.Repo, error) {
 	repos, err := internal.NewClientWithToken(c.URL, c.Consumer, u.Token).FindRepos()
 	if err != nil {
 		return nil, err
 	}
-	var all []*model.RepoLite
+	var all []*model.Repo
 	for _, repo := range repos {
-		all = append(all, convertRepoLite(repo))
+		all = append(all, convertRepo(repo))
 	}
 
 	return all, nil
@@ -154,7 +155,7 @@ func (c *Config) File(u *model.User, r *model.Repo, b *model.Build, f string) ([
 }
 
 // Status is not supported by the bitbucketserver driver.
-func (c *Config) Status(u *model.User,r *model.Repo,b *model.Build,link string) error {
+func (c *Config) Status(u *model.User, r *model.Repo, b *model.Build, link string) error {
 	status := internal.BuildStatus{
 		State: convertStatus(b.Status),
 		Desc:  convertDesc(b.Status),

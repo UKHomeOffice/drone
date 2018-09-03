@@ -209,15 +209,15 @@ func (_m *Remote) Repo(u *model.User, owner string, repo string) (*model.Repo, e
 }
 
 // Repos provides a mock function with given fields: u
-func (_m *Remote) Repos(u *model.User) ([]*model.RepoLite, error) {
+func (_m *Remote) Repos(u *model.User) ([]*model.Repo, error) {
 	ret := _m.Called(u)
 
-	var r0 []*model.RepoLite
-	if rf, ok := ret.Get(0).(func(*model.User) []*model.RepoLite); ok {
+	var r0 []*model.Repo
+	if rf, ok := ret.Get(0).(func(*model.User) []*model.Repo); ok {
 		r0 = rf(u)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).([]*model.RepoLite)
+			r0 = ret.Get(0).([]*model.Repo)
 		}
 	}
 

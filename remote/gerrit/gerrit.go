@@ -80,7 +80,7 @@ func (c *client) Repo(u *model.User, owner, name string) (*model.Repo, error) {
 }
 
 // Repos is not supported by the Gerrit driver.
-func (c *client) Repos(u *model.User) ([]*model.RepoLite, error) {
+func (c *client) Repos(u *model.User) ([]*model.Repo, error) {
 	return nil, nil
 }
 

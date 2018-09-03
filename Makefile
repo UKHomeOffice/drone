@@ -68,8 +68,8 @@ build_tar:
 
 # TODO this is getting moved to a shell script, do not alter
 build_sha:
-	sha256sum release/linux/amd64/drone.tar.gz   > release/linux/amd64/drone.sha256
-	sha256sum release/linux/arm64/drone.tar.gz   > release/linux/arm64/drone.sha256
-	sha256sum release/linux/arm/drone.tar.gz     > release/linux/arm/drone.sha256
-	sha256sum release/windows/amd64/drone.tar.gz > release/windows/amd64/drone.sha256
-	sha256sum release/darwin/amd64/drone.tar.gz  > release/darwin/amd64/drone.sha256
+	shasum -a 256 release/linux/amd64/drone.tar.gz   > release/linux/amd64/drone.sha256
+	shasum -a 256 release/linux/arm64/drone.tar.gz   > release/linux/arm64/drone.sha256
+	shasum -a 256 release/linux/arm/drone.tar.gz     > release/linux/arm/drone.sha256
+	shasum -a 256 release/windows/amd64/drone.tar.gz > release/windows/amd64/drone.sha256
+	shasum -a 256 release/darwin/amd64/drone.tar.gz  > release/darwin/amd64/drone.sha256

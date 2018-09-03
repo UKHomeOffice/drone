@@ -107,7 +107,7 @@ func TestRepos(t *testing.T) {
 			s.CreateRepo(repo2)
 			s.CreateRepo(repo3)
 
-			repos, err := s.GetRepoListOf([]*model.RepoLite{
+			repos, err := s.GetRepoListOf([]*model.Repo{
 				{FullName: "bradrydzewski/drone"},
 				{FullName: "drone/drone"},
 			})

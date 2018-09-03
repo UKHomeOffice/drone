@@ -108,10 +108,10 @@ func convertTeamPerm(from *github.Membership) *model.Perm {
 
 // convertRepoList is a helper function used to convert a GitHub repository
 // list to the common Drone repository structure.
-func convertRepoList(from []github.Repository) []*model.RepoLite {
-	var repos []*model.RepoLite
+func convertRepoList(from []github.Repository) []*model.Repo {
+	var repos []*model.Repo
 	for _, repo := range from {
-		repos = append(repos, convertRepoLite(repo))
+		repos = append(repos, convertRepo(&repo, false))
 	}
 	return repos
 }

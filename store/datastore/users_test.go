@@ -181,6 +181,7 @@ func TestUsers(t *testing.T) {
 				Name:     "hello-world",
 				FullName: "octocat/hello-world",
 			}
+
 			s.CreateRepo(repo1)
 			s.CreateRepo(repo2)
 			s.CreateRepo(repo3)
@@ -206,7 +207,7 @@ func TestUsers(t *testing.T) {
 			s.CreateBuild(build3)
 			s.CreateBuild(build4)
 
-			builds, err := s.GetUserFeed([]*model.RepoLite{
+			builds, err := s.GetUserFeed([]*model.Repo{
 				{FullName: "bradrydzewski/drone"},
 				{FullName: "drone/drone"},
 			})

@@ -31,7 +31,7 @@ type Remote interface {
 	Repo(u *model.User, owner, repo string) (*model.Repo, error)
 
 	// Repos fetches a list of repos from the remote system.
-	Repos(u *model.User) ([]*model.RepoLite, error)
+	Repos(u *model.User) ([]*model.Repo, error)
 
 	// Perm fetches the named repository permissions from
 	// the remote system for the specified user.
@@ -97,7 +97,7 @@ func Repo(c context.Context, u *model.User, owner, repo string) (*model.Repo, er
 }
 
 // Repos fetches a list of repos from the remote system.
-func Repos(c context.Context, u *model.User) ([]*model.RepoLite, error) {
+func Repos(c context.Context, u *model.User) ([]*model.Repo, error) {
 	return FromContext(c).Repos(u)
 }
 
@@ -109,12 +109,12 @@ func Perm(c context.Context, u *model.User, owner, repo string) (*model.Perm, er
 
 // File fetches a file from the remote repository and returns in string format.
 func File(c context.Context, u *model.User, r *model.Repo, b *model.Build, f string) (out []byte, err error) {
-	for i:=0;i<5;i++ {
+	for i := 0; i < 5; i++ {
 		out, err = FromContext(c).File(u, r, b, f)
 		if err == nil {
 			return
 		}
-		time.Sleep(1*time.Second)
+		time.Sleep(1 * time.Second)
 	}
 	return
 }

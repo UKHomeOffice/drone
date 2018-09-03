@@ -120,10 +120,10 @@ func (c *config) Repo(u *model.User, owner, name string) (*model.Repo, error) {
 
 // Repos returns a list of all repositories for Bitbucket account, including
 // organization repositories.
-func (c *config) Repos(u *model.User) ([]*model.RepoLite, error) {
+func (c *config) Repos(u *model.User) ([]*model.Repo, error) {
 	client := c.newClient(u)
 
-	var all []*model.RepoLite
+	var all []*model.Repo
 
 	accounts := []string{u.Login}
 	resp, err := client.ListTeams(&internal.ListTeamOpts{
@@ -143,7 +143,7 @@ func (c *config) Repos(u *model.User) ([]*model.RepoLite, error) {
 			return all, err
 		}
 		for _, repo := range repos {
-			all = append(all, convertRepoLite(repo))
+			all = append(all, convertRepo(repo))
 		}
 	}
 	return all, nil

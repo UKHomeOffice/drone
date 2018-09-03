@@ -19,7 +19,7 @@ func (db *datastore) GetRepoName(name string) (*model.Repo, error) {
 	return repo, err
 }
 
-func (db *datastore) GetRepoListOf(listof []*model.RepoLite) ([]*model.Repo, error) {
+func (db *datastore) GetRepoListOf(listof []*model.Repo) ([]*model.Repo, error) {
 	var (
 		repos []*model.Repo
 		args  []interface{}

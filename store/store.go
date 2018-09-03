@@ -19,11 +19,11 @@ type Store interface {
 	GetUserList() ([]*model.User, error)
 
 	// GetUserFeed gets a user activity feed.
-	GetUserFeed([]*model.RepoLite) ([]*model.Feed, error)
+	GetUserFeed([]*model.Repo) ([]*model.Feed, error)
 
 	// GetUserFeedLatest gets a user activity feed for all repositories including
 	// only the latest build for each repository.
-	GetUserFeedLatest(listof []*model.RepoLite) ([]*model.Feed, error)
+	GetUserFeedLatest(listof []*model.Repo) ([]*model.Feed, error)
 
 	// GetUserCount gets a count of all users in the system.
 	GetUserCount() (int, error)
@@ -44,7 +44,7 @@ type Store interface {
 	GetRepoName(string) (*model.Repo, error)
 
 	// GetRepoListOf gets the list of enumerated repos in the system.
-	GetRepoListOf([]*model.RepoLite) ([]*model.Repo, error)
+	GetRepoListOf([]*model.Repo) ([]*model.Repo, error)
 
 	// GetRepoCount gets a count of all repositories in the system.
 	GetRepoCount() (int, error)
@@ -164,7 +164,7 @@ func GetUserList(c context.Context) ([]*model.User, error) {
 }
 
 // GetUserFeed gets a user activity feed.
-func GetUserFeed(c context.Context, listof []*model.RepoLite, latest bool) ([]*model.Feed, error) {
+func GetUserFeed(c context.Context, listof []*model.Repo, latest bool) ([]*model.Feed, error) {
 	if latest {
 		return FromContext(c).GetUserFeedLatest(listof)
 	}
@@ -200,7 +200,7 @@ func GetRepoOwnerName(c context.Context, owner, name string) (*model.Repo, error
 	return FromContext(c).GetRepoName(owner + "/" + name)
 }
 
-func GetRepoListOf(c context.Context, listof []*model.RepoLite) ([]*model.Repo, error) {
+func GetRepoListOf(c context.Context, listof []*model.Repo) ([]*model.Repo, error) {
 	return FromContext(c).GetRepoListOf(listof)
 }
 

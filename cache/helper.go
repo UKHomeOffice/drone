@@ -55,14 +55,14 @@ func GetTeamPerms(c context.Context, user *model.User, org string) (*model.Perm,
 
 // GetRepos returns the list of user repositories from the cache
 // associated with the current context.
-func GetRepos(c context.Context, user *model.User) ([]*model.RepoLite, error) {
+func GetRepos(c context.Context, user *model.User) ([]*model.Repo, error) {
 	key := fmt.Sprintf("repos:%s",
 		user.Login,
 	)
 	// if we fetch from the cache we can return immediately
 	val, err := Get(c, key)
 	if err == nil {
-		return val.([]*model.RepoLite), nil
+		return val.([]*model.Repo), nil
 	}
 	// else we try to grab from the remote system and
 	// populate our cache.

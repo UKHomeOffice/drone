@@ -24,12 +24,12 @@ func Repo(c *gin.Context) *model.Repo {
 	return r
 }
 
-func Repos(c *gin.Context) []*model.RepoLite {
+func Repos(c *gin.Context) []*model.Repo {
 	v, ok := c.Get("repos")
 	if !ok {
 		return nil
 	}
-	r, ok := v.([]*model.RepoLite)
+	r, ok := v.([]*model.Repo)
 	if !ok {
 		return nil
 	}
